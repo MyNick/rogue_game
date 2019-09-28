@@ -9,6 +9,8 @@ public class SceneLoader : MonoBehaviour
 
 	private static SceneLoader Instance;
 
+	private GameObject Player;
+	
 	private static Queue<string> loadedScenes = new Queue<string>();
 
 	void Awake()
@@ -17,7 +19,7 @@ public class SceneLoader : MonoBehaviour
 		DontDestroyOnLoad(this);
 		SceneManager.LoadSceneAsync("AutoSceneLeftUp", LoadSceneMode.Additive);
 		SceneManager.LoadSceneAsync("AutoSceneRightUp", LoadSceneMode.Additive);
-		
+
 		loadedScenes.Enqueue("AutoSceneLeftUp");
 		loadedScenes.Enqueue("AutoSceneRightUp");
 	}
