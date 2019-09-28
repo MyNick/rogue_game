@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Enemy.cs" t="Include" />
         <e p="Player.cs" t="Include" />
+        <e p="RoomGenerator.cs" t="Include" />
         <e p="RoomLoader.cs" t="Include" />
         <e p="Scenes" t="Include">
           <e p="SceneLoader.cs" t="Include" />

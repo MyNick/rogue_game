@@ -17,17 +17,20 @@ public class SceneLoader : MonoBehaviour
 	{
 		Instance = this;
 		DontDestroyOnLoad(this);
-		SceneManager.LoadSceneAsync("AutoSceneLeftUp", LoadSceneMode.Additive);
+		//SceneManager.LoadSceneAsync("AutoSceneLeftUp", LoadSceneMode.Additive);
 		SceneManager.LoadSceneAsync("AutoSceneRightUp", LoadSceneMode.Additive);
 
-		loadedScenes.Enqueue("AutoSceneLeftUp");
+		//loadedScenes.Enqueue("AutoSceneLeftUp");
 		loadedScenes.Enqueue("AutoSceneRightUp");
 	}
 
 
 	public static void Reload(string toLoad)
 	{
-		SceneManager.UnloadSceneAsync(loadedScenes.Dequeue());
+		if (loadedScenes.Count >= 2)
+		{
+			SceneManager.UnloadSceneAsync(loadedScenes.Dequeue());
+		}
 		SceneManager.LoadSceneAsync(toLoad, LoadSceneMode.Additive);
 		loadedScenes.Enqueue(toLoad);
 	}
