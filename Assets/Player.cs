@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,6 +8,12 @@ public class Player : MonoBehaviour
     
     [SerializeField]
     private float speed;
+
+    [SerializeField] private float health = 3;
+    [SerializeField] private float damage = 1;
+
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI damageText;
 
     private SpriteRenderer spriteRenderer;
     private Animator anim;
@@ -63,8 +70,30 @@ public class Player : MonoBehaviour
     {
         if (other.GetComponent<Enemy>() && walkTimer >= 0)
         {
-            other.GetComponent<Enemy>().TakeDamage(10);
+            other.GetComponent<Enemy>().TakeDamage(damage);
             sword.enabled = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.GetComponent<Enemy>())
+            TakeDamage(other.gameObject.GetComponent<Enemy>().damage);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        healthText.text = health.ToString();
+        if(health <= 0)
+            Destroy(gameObject);
+    }
+
+    public void PowerUp(bool powerHP, bool powerDmg)
+    {
+        health += powerHP ? 1 : 0;
+        damage += powerDmg ? 1 : 0;
+        healthText.text = health.ToString();
+        damageText.text = damage.ToString();
     }
 }

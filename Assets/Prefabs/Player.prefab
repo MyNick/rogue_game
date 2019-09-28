@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  health: 3
+  damage: 1
+  healthText: {fileID: 0}
+  damageText: {fileID: 0}
 --- !u!61 &8106908166440114883
 BoxCollider2D:
   m_ObjectHideFlags: 0
