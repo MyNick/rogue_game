@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    const float offsetX = 0.63f;
+    
     [SerializeField]
     private float speed;
 
@@ -28,13 +30,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        walkTimer -= Time.deltaTime;
         if(walkTimer <= 0)
             MovementLogic();
-        else
-        {
-            walkTimer -= Time.deltaTime;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && walkTimer <= 0)
         {
             sword.enabled = true;
             anim.SetTrigger(attack);
@@ -50,9 +49,12 @@ public class Player : MonoBehaviour
         if (movement.x != 0)
         {
             looking_right = movement.x > 0;
+
         }
 
         spriteRenderer.flipX = !looking_right;
+        sword.offset =  new Vector2(offsetX * (spriteRenderer.flipX ? -1 : 1), sword.offset.y);
+
         transform.position += movement * Time.deltaTime * speed;
         sword.enabled = false;
     }
