@@ -89,10 +89,10 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void PowerUp(bool powerHP, bool powerDmg)
+    public void PowerUp(string boostFor, int boostAmount)
     {
-        health += powerHP ? 1 : 0;
-        damage += powerDmg ? 1 : 0;
+        health += boostFor == "Health" ? boostAmount : 0;
+        damage += boostFor == "Damage" ? boostAmount : 0;
         healthText.text = health.ToString();
         damageText.text = damage.ToString();
     }

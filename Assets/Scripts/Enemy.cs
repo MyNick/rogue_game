@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using Random = System.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        //Instantiate(powerUp,transform.position, Quaternion.identity);
+        if(UnityEngine.Random.Range(0, 100) > 80)
+            Instantiate(GameManager.Instance.GetRandomPickup().gameObject,transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
